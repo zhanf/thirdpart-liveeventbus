@@ -1,0 +1,8 @@
+apply from: rootProject.file("buildsystem/config/include.gradle")
+apply from: rootProject.file("buildsystem/config/include-kotlin.gradle")
+apply plugin: 'shihuoapp-deploy'
+
+dependencies {
+    implementation rootProject.ext.dependencies["androidx_lifecycle"]
+    implementation rootProject.ext.dependencies["androidx_livedata"]
+}

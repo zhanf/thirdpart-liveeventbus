@@ -1,0 +1,3 @@
+rootProject.name = "thirdpart-liveeventbus"
+include ':app'
+include ':liveeventbus-x'

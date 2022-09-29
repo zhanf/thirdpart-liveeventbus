@@ -1,0 +1,48 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+apply from: rootProject.file("buildsystem/config/dependencies.gradle")
+apply from: rootProject.file("buildsystem/config/base.gradle")
+apply from: rootProject.file("buildsystem/config/shihuo.gradle")
+
+
+ext.shihuo.putAll(ext.shihuo_dependencies.third_part)
+ext.shihuo.putAll(ext.shihuo_dependencies.library)
+ext.shihuo.putAll(ext.shihuo_dependencies.component)
+ext.shihuo.putAll(ext.shihuo_dependencies.module)
+ext.shihuo.putAll(ext.shihuo_dependencies.androidx)
+ext.shihuo.putAll(ext.shihuo_dependencies.dependencies)
+ext.shihuo.putAll(ext.shihuo_dependencies.widget)
+ext.shihuo.putAll(ext.shihuo_dependencies.shizhuang)
+
+ext.shihuo_dependencies = null
+// TODO: 考虑将应用的地方统一为dependencies
+ext.dependencies.putAll(ext.shihuo)
+
+
+buildscript {
+    ext.kotlin_version = '1.3.72'
+    repositories {
+        mavenLocal()
+        maven { url 'http://nexus.shihuo.io/repository/maven-public/' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72'
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
+        classpath "com.shizhi.shihuoapp.plugin:plugin-deploy:1.0.11"
+    }
+}
+
+allprojects {
+    repositories {
+        if (isDev) {
+            mavenLocal()
+        }
+        maven { url "http://nexus.shihuo.io/repository/maven-public/" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
